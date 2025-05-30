@@ -123,7 +123,7 @@ async function searchQuery(query: Query) {
 
   const items = data.tracks.items;
   const itemsWithMinimumPopularity = items.filter(
-    (item) => item.popularity >= MINIMUM_POPULARITY
+    (item: any) => item.popularity >= MINIMUM_POPULARITY
   );
 
   if (itemsWithMinimumPopularity.length === 0) {
@@ -144,7 +144,7 @@ async function searchQuery(query: Query) {
   }
 
   const filteredItems = itemsWithMinimumPopularity.filter(
-    (item) => item.preview_url
+    (item: any) => item.preview_url
   );
 
   if (filteredItems.length === 0) {
@@ -196,9 +196,9 @@ async function getSpotifyLinks(url: string) {
     const $ = cheerio.load(html);
     const scdnLinks = new Set();
 
-    $("*").each((i, element) => {
+    $("*").each((i, element: any) => {
       const attrs = element.attribs;
-      Object.values(attrs).forEach((value) => {
+      Object.values(attrs).forEach((value: any) => {
         if (value && value.includes("p.scdn.co")) {
           scdnLinks.add(value);
         }
