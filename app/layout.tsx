@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Be_Vietnam_Pro, Russo_One } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const mono = Russo_One({
+  weight: "400",
+  variable: "--mono",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sans = Be_Vietnam_Pro({
+  weight: "400",
+  variable: "--sans",
   subsets: ["latin"],
 });
 
@@ -25,9 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${mono.variable} ${sans.variable} antialiased`}>
         {children}
         <Analytics />
       </body>

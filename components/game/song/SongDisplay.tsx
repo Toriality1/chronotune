@@ -3,8 +3,10 @@ import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SongDisplay() {
-  const { currentSong, isGuessing, isPlaying, togglePlayPause } =
+  const { isLoading, currentSong, isGuessing, isPlaying, togglePlayPause } =
     useGameContext();
+
+  if (isLoading) return null;
 
   return (
     <>

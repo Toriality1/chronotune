@@ -1,22 +1,35 @@
-"use client";
+ "use client";
 
-import GameWrapper from "@/components/GameWrapper";
-import dynamic from "next/dynamic";
-import { useSearchParams } from "next/navigation";
+ import GameLayout from "@/components/game/GameLayout";
+ import GameBox from "@/components/game/GameBox";
+ import SongInfo from "@/components/game/song/SongInfo";
+ import SongDisplay from "@/components/game/song/SongDisplay";
+ import GuessWrapper from "@/components/game/guess/GuessWrapper";
+ import GameSettings from "@/components/game/GameSettings";
+ import Loading from "@/components/Loading";
+ import EndScreen from "@/components/game/GameEndScreen";
+ import { useGameContext } from "@/hooks/GameProvider";
 
-const DynamicGameProvider = dynamic(
-  () => import("@/hooks/GameProvider").then((mod) => mod.GameProvider),
-  {
-    ssr: false,
-  }
-);
+ export default function Page() {
+   const { isLoading, hasFinished, color, isGuessing } = useGameContext();
 
-export default function Page() {
-  const searchParams = useSearchParams();
-  const mockup = searchParams.get("mockup");
-  return (
-    <DynamicGameProvider useMockup={mockup !== null}>
-      <GameWrapper />
-    </DynamicGameProvider>
-  );
-}
+   return (
+     <GameLayout>
+       {isLoading ? (
+         <Loading color={color} />
+       ) : (
+         <GameBox color={color}>
+           {!hasFinished ? (
+             <>
+               {isGuessing ? <GameSettings /> : <SongInfo />}
+               <SongDisplay />
+               <GuessWrapper />
+             </>
+           ) : (
+             <EndScreen />
+           )}
+         </GameBox>
+       )}
+     </GameLayout>
+   );
+ }

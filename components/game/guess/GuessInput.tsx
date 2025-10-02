@@ -1,19 +1,15 @@
 "use client";
 
 import { useGameContext } from "@/hooks/GameProvider";
+import { useSettings } from "@/hooks/SettingsProvider";
 import { useEffect, useRef, useState } from "react";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-export default function GuessInput() {
-  const {
-    isGuessValid,
-    isGuessing,
-    setGuessNumber,
-    isUsingSlider,
-    songScore,
-    guessNumber,
-  } = useGameContext();
+export default function uessInput() {
+  const { isGuessValid, isGuessing, setGuessNumber, songScore, guessNumber } =
+    useGameContext();
+  const { isUsingSlider } = useSettings();
   const [sliderPosition, setSliderPosition] = useState<Number>(0);
 
   const colors = {
@@ -65,7 +61,7 @@ export default function GuessInput() {
   }, [isUsingSlider, guessNumber]);
 
   function handleSliderStart(
-    e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+    e: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
   ) {
     if (e.type == "touchstart") {
       timelineRef.current?.addEventListener("touchmove", (e) => {
@@ -85,11 +81,11 @@ export default function GuessInput() {
     window.document.removeEventListener("mouseup", handleSliderStop);
     timelineRef.current?.removeEventListener(
       "touchmove",
-      handleSliderMove as EventListener
+      handleSliderMove as EventListener,
     );
     timelineRef.current?.removeEventListener(
       "touchend",
-      handleSliderStop as EventListener
+      handleSliderStop as EventListener,
     );
   }
 

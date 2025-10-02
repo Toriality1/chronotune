@@ -4,6 +4,7 @@ import { useCallback, useEffect } from "react";
 
 export default function EndScreen() {
   const { totalScore, songs } = useGameContext();
+
   const numOfSongs = Number(localStorage.getItem("numOfSongs")) || 5;
   const bestScore = Number(localStorage.getItem(`bestScore-${numOfSongs}`));
 
@@ -77,12 +78,14 @@ export default function EndScreen() {
           </ul>
         </div>
       </div>
-      <Link
-        className="bg-white m-auto mix-blend-difference mb-2 py-2 px-4 text-2xl rounded-xl"
-        href={"/"}
-      >
-        <p className="text-black font-black">Play again</p>
-      </Link>
+      {!shouldDisablePlayAgain && (
+        <Link
+          className="bg-white m-auto mix-blend-difference mb-2 py-2 px-4 text-2xl rounded-xl"
+          href={"/"}
+        >
+          <p className="text-black font-black">Play again</p>
+        </Link>
+      )}
     </div>
   );
 }

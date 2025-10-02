@@ -7,10 +7,10 @@ import {
   faVolumeUp,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useGameContext } from "@/hooks/GameProvider";
+import { useSettings } from "@/hooks/SettingsProvider";
 
 export default function GameSettings() {
-  const { isMuted, isUsingSlider, toggleSlider, toggleMute } = useGameContext();
+  const { isMuted, isUsingSlider, toggleSlider, toggleMute } = useSettings();
 
   return (
     <div className="z-10 flex justify-between p-2">

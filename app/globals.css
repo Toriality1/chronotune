@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.title {
+  font-family: "Russo One", sans-serif;
+}
+
 body {
   background-color: black;
   color: white;
